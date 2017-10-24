@@ -1,18 +1,20 @@
-#define ACCELERATION 1900 
-#define ACCELERATION_DISTANCE 200 
-#define MAX_SPEED 7.0f // rpm
+#define ACCELERATION 200 
+#define ACCELERATION_DISTANCE 90 // degrees
+#define MAX_SPEED 15.0f // rpm
 
-#define RESET_SPEED 4.0 // rpm
+#define RESET_SPEED 1.0 // rpm
 
-#define TOP_BOX_RESET_DISTANCE 100
+#define TOP_BOX_RESET_DISTANCE -10
 #define TOP_BOX_RESET_DIRECTION BMD::Direction::CLOCKWISE
 
-#define BOTTOM_BOX_RESET_DISTANCE 120
+#define BOTTOM_BOX_RESET_DISTANCE 10
 #define BOTTOM_BOX_RESET_DIRECTION BMD::Direction::ANTICLOCKWISE
 
-#define SLEEP_TIME 1 // seconds
+#define SLEEP_TIME 5 // seconds
 
-#define CYCLES_PER_RESET 2
+#define CYCLES_PER_RESET 10
+
+#define ROTATIONS 2160  // degrees 
 
 //////////////////////////////////////////////////////////////////////
 
@@ -65,9 +67,11 @@ void loop() {
 
     // FIRST PHASE
     //////////////////////////////////////////////////////////
+
+    sleep(SLEEP_TIME);
     
     topMotor.setDirection(BMD::Direction::CLOCKWISE);
-    topMotor.setDistance(90);
+    topMotor.setDistance(1530);
     topMotor.turn();
   
     updateMotors();
@@ -77,11 +81,11 @@ void loop() {
     //////////////////////////////////////////////////////////
   
     topMotor.setDirection(BMD::Direction::ANTICLOCKWISE);
-    topMotor.setDistance(90);
+    topMotor.setDistance(ROTATIONS + 90);
     topMotor.turn();
   
     bottomMotor.setDirection(BMD::Direction::CLOCKWISE);
-    bottomMotor.setDistance(90);
+    bottomMotor.setDistance(ROTATIONS + 90);
     bottomMotor.turn();
   
     updateMotors();
@@ -90,12 +94,12 @@ void loop() {
     // THIRD PHASE
     //////////////////////////////////////////////////////////
   
-    topMotor.setDirection(BMD::Direction::ANTICLOCKWISE);
-    topMotor.setDistance(90);
+    topMotor.setDirection(BMD::Direction::CLOCKWISE);
+    topMotor.setDistance(ROTATIONS + 90);
     topMotor.turn();
   
-    bottomMotor.setDirection(BMD::Direction::CLOCKWISE);
-    bottomMotor.setDistance(90);
+    bottomMotor.setDirection(BMD::Direction::ANTICLOCKWISE);
+    bottomMotor.setDistance(ROTATIONS + 90);
     bottomMotor.turn();
   
     updateMotors();
